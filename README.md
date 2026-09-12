@@ -1,4 +1,4 @@
-\# PaySwitch
+# PaySwitch
 
 
 
@@ -10,7 +10,7 @@ PaySwitch provides a unified payment API over multiple payment gateways, with in
 
 
 
-\## Architecture
+## Architecture
 
 
 
@@ -78,41 +78,41 @@ PaySwitch provides a unified payment API over multiple payment gateways, with in
 
 
 
-\---
+---
 
 
 
-\## Key Features
+## Key Features
 
 
 
-\### Payment Processing
+### Payment Processing
 
 
 
-\- Create payments through a unified REST API
+- Create payments through a unified REST API
 
-\- Payment state machine with controlled transitions
+- Payment state machine with controlled transitions
 
-\- Capture and refund operations
+- Capture and refund operations
 
-\- Payment attempt tracking
+- Payment attempt tracking
 
-\- Persistent payment event history
-
-
-
-\### Smart Gateway Routing
+- Persistent payment event history
 
 
 
-\- Gateway abstraction layer
+### Smart Gateway Routing
 
-\- Multiple gateway candidates
 
-\- Priority-based routing
 
-\- Gateway health awareness
+- Gateway abstraction layer
+
+- Multiple gateway candidates
+
+- Priority-based routing
+
+- Gateway health awareness
 
 \- Automatic failover
 
