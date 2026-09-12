@@ -1,4 +1,4 @@
-# PaySwitch
+ # PaySwitch
 
 
 
@@ -16,259 +16,259 @@ PaySwitch provides a unified payment API over multiple payment gateways, with in
 
 ```text
 
-&#x20;                   ┌─────────────────────┐
+                    ┌─────────────────────┐
 
-&#x20;                   │   Admin Dashboard    │
+                    │   Admin Dashboard    │
 
-&#x20;                   │   React + TypeScript │
+                    │   React + TypeScript │
 
-&#x20;                   └──────────┬──────────┘
+                    └──────────┬──────────┘
 
-&#x20;                              │ REST
+                               │ REST
 
-&#x20;                              ▼
+                               ▼
 
-&#x20;                   ┌─────────────────────┐
+                    ┌─────────────────────┐
 
-&#x20;                   │    PaySwitch API    │
+                    │    PaySwitch API    │
 
-&#x20;                   │       Haskell       │
+                    │       Haskell       │
 
-&#x20;                   └──────────┬──────────┘
+                    └──────────┬──────────┘
 
-&#x20;                              │
+                               │
 
-&#x20;                   ┌──────────▼──────────┐
+                    ┌──────────▼──────────┐
 
-&#x20;                   │   Payment Service   │
+                    │   Payment Service   │
 
-&#x20;                   └──────────┬──────────┘
+                    └──────────┬──────────┘
 
-&#x20;                              │
+                               │
 
-&#x20;                   ┌──────────▼──────────┐
+                    ┌──────────▼──────────┐
 
-&#x20;                   │   Smart Router      │
+                    │   Smart Router      │
 
-&#x20;                   │ priority + health   │
+                    │ priority + health   │
 
-&#x20;                   │ retry + failover    │
+                    │ retry + failover    │
 
-&#x20;                   └───────┬───────┬─────┘
+                    └───────┬───────┬─────┘
 
-&#x20;                           │       │
+                            │       │
 
-&#x20;                  ┌────────▼─┐   ┌─▼────────┐
+                   ┌────────▼─┐   ┌─▼────────┐
 
-&#x20;                  │  Stripe  │   │   Mock   │
+                   │  Stripe  │   │   Mock   │
 
-&#x20;                  │ Gateway  │   │ Gateways │
+                   │ Gateway  │   │ Gateways │
 
-&#x20;                  └──────────┘   └──────────┘
+                   └──────────┘   └──────────┘
 
 
 
-&#x20;            ┌──────────────────────────────┐
+             ┌──────────────────────────────┐
 
-&#x20;            │ PostgreSQL │ Redis │ Worker  │
+             │ PostgreSQL │ Redis │ Worker  │
 
-&#x20;            └──────────────────────────────┘
+             └──────────────────────────────┘
 
 ```
 
 
 
----
+ ---
 
 
 
-## Key Features
+ ## Key Features
 
 
 
-### Payment Processing
+ ### Payment Processing
 
 
 
-- Create payments through a unified REST API
+ - Create payments through a unified REST API
 
-- Payment state machine with controlled transitions
+ - Payment state machine with controlled transitions
 
-- Capture and refund operations
+ - Capture and refund operations
 
-- Payment attempt tracking
+ - Payment attempt tracking
 
-- Persistent payment event history
+ - Persistent payment event history
 
 
 
-### Smart Gateway Routing
+ ### Smart Gateway Routing
 
 
 
-- Gateway abstraction layer
+ - Gateway abstraction layer
 
-- Multiple gateway candidates
+ - Multiple gateway candidates
 
-- Priority-based routing
+ - Priority-based routing
 
-- Gateway health awareness
+ - Gateway health awareness
 
-\- Automatic failover
+ - Automatic failover
 
-\- Retryable vs non-retryable error classification
+ - Retryable vs non-retryable error classification
 
 
 
-\### Reliability
+ ### Reliability
 
 
 
-\- Idempotency-Key support
+ - Idempotency-Key support
 
-\- Duplicate payment protection
+ - Duplicate payment protection
 
-\- Retry and failover handling
+ - Retry and failover handling
 
-\- Background reconciliation worker
+ - Background reconciliation worker
 
-\- Gateway health tracking
+ - Gateway health tracking
 
 
 
-\### Webhooks
+ ### Webhooks
 
 
 
-\- Gateway webhook processing
+ - Gateway webhook processing
 
-\- Duplicate webhook detection
+ - Duplicate webhook detection
 
-\- Out-of-order state transition protection
+ - Out-of-order state transition protection
 
-\- Webhook event persistence
+ - Webhook event persistence
 
 
 
-\### Reconciliation
+ ### Reconciliation
 
 
 
-\- Compare internal payment state with gateway state
+ - Compare internal payment state with gateway state
 
-\- Detect MATCH / MISMATCH conditions
+ - Detect MATCH / MISMATCH conditions
 
-\- Persist reconciliation records
+ - Persist reconciliation records
 
-\- Support synchronous and asynchronous reconciliation
+ - Support synchronous and asynchronous reconciliation
 
 
 
-\### Infrastructure
+ ### Infrastructure
 
 
 
-\- PostgreSQL persistence
+ - PostgreSQL persistence
 
-\- Redis job queue
+ - Redis job queue
 
-\- Background worker
+ - Background worker
 
-\- Dockerized deployment
+ - Dockerized deployment
 
-\- Docker Compose environment
+ - Docker Compose environment
 
-\- Health endpoint
+ - Health endpoint
 
-\- Application metrics
+ - Application metrics
 
 
 
-\### Operations Dashboard
+ ### Operations Dashboard
 
 
 
-\- React + TypeScript
+ - React + TypeScript
 
-\- Payment creation
+ - Payment creation
 
-\- Payment status visibility
+ - Payment status visibility
 
-\- Gateway health overview
+ - Gateway health overview
 
-\- Basic operational statistics
+ - Basic operational statistics
 
-\- Backend health monitoring
+ - Backend health monitoring
 
 
 
-\---
+ ---
 
 
 
-\## Tech Stack
+ ## Tech Stack
 
 
 
-\### Backend
+ ### Backend
 
 
 
-\- Haskell
+ - Haskell
 
-\- GHC 9.10
+ - GHC 9.10
 
-\- Servant
+ - Servant
 
-\- PostgreSQL
+ - PostgreSQL
 
-\- postgresql-simple
+ - postgresql-simple
 
-\- Redis
+ - Redis
 
-\- hedis
+ - hedis
 
-\- HTTP client / Stripe API integration
+ - HTTP client / Stripe API integration
 
 
 
-\### Frontend
+ ### Frontend
 
 
 
-\- React
+ - React
 
-\- TypeScript
+ - TypeScript
 
-\- Vite
+ - Vite
 
-\- CSS
+ - CSS
 
 
 
-\### Infrastructure
+ ### Infrastructure
 
 
 
-\- Docker
+ - Docker
 
-\- Docker Compose
+ - Docker Compose
 
-\- PostgreSQL 16
+ - PostgreSQL 16
 
-\- Redis 7
+ - Redis 7
 
 
 
-\---
+ ---
 
 
 
-\## API
+ ## API
 
 
 
-\*\*Base URL:\*\*
+ * *Base URL: * *
 
 
 
@@ -280,7 +280,7 @@ http://localhost:8080
 
 
 
-\### Health
+ ### Health
 
 
 
@@ -292,7 +292,7 @@ GET /v1/health
 
 
 
-\### Create Payment
+ ### Create Payment
 
 
 
@@ -316,11 +316,11 @@ Example:
 
 {
 
-&#x20; "amount": 10000,
+  "amount": 10000,
 
-&#x20; "currency": "INR",
+  "currency": "INR",
 
-&#x20; "paymentMethod": "card"
+  "paymentMethod": "card"
 
 }
 
@@ -328,11 +328,11 @@ Example:
 
 
 
-\---
+ ---
 
 
 
-\## Payment Lifecycle
+ ## Payment Lifecycle
 
 
 
@@ -340,29 +340,29 @@ Example:
 
 CREATED
 
-&#x20;  │
+   │
 
-&#x20;  ▼
+   ▼
 
 PROCESSING
 
-&#x20;  ├──────────────► FAILED
+   ├──────────────► FAILED
 
-&#x20;  │
+   │
 
-&#x20;  ▼
+   ▼
 
 SUCCESS
 
-&#x20;  │
+   │
 
-&#x20;  ▼
+   ▼
 
 CAPTURED
 
-&#x20;  │
+   │
 
-&#x20;  ▼
+   ▼
 
 REFUNDED
 
@@ -370,11 +370,11 @@ REFUNDED
 
 
 
-\---
+ ---
 
 
 
-\## Running with Docker
+ ## Running with Docker
 
 
 
@@ -436,11 +436,11 @@ curl http://localhost:8080/v1/health
 
 
 
-\---
+ ---
 
 
 
-\## Running the Dashboard
+ ## Running the Dashboard
 
 
 
@@ -472,41 +472,41 @@ http://localhost:5173
 
 
 
-\---
+ ---
 
 
 
-\## Example Payment Request
+ ## Example Payment Request
 
 
 
 ```bash
 
-curl -X POST http://localhost:8080/v1/payments \\
+curl -X POST http://localhost:8080/v1/payments   
 
-&#x20; -H "Content-Type: application/json" \\
+  -H "Content-Type: application/json"   
 
-&#x20; -H "Idempotency-Key: demo-payment-001" \\
+  -H "Idempotency-Key: demo-payment-001"   
 
-&#x20; -d '{
+  -d '{
 
-&#x20;   "amount": 10000,
+    "amount": 10000,
 
-&#x20;   "currency": "INR",
+    "currency": "INR",
 
-&#x20;   "paymentMethod": "card"
+    "paymentMethod": "card"
 
-&#x20; }'
+  }'
 
 ```
 
 
 
-\---
+ ---
 
 
 
-\## Stripe Integration
+ ## Stripe Integration
 
 
 
@@ -526,11 +526,11 @@ This allows the same payment orchestration flow to work with both external and m
 
 
 
-\---
+ ---
 
 
 
-\## Database
+ ## Database
 
 
 
@@ -542,29 +542,29 @@ Important tables include:
 
 
 
-\- `payments`
+ - `payments`
 
-\- `payment\_attempts`
+ - `payment _attempts`
 
-\- `payment\_events`
+ - `payment _events`
 
-\- `idempotency\_keys`
+ - `idempotency _keys`
 
-\- `webhook\_events`
+ - `webhook _events`
 
-\- `routing\_rules`
+ - `routing _rules`
 
-\- `gateway\_health`
+ - `gateway _health`
 
-\- `reconciliation\_records`
-
-
-
-\---
+ - `reconciliation _records`
 
 
 
-\## Project Structure
+ ---
+
+
+
+ ## Project Structure
 
 
 
@@ -650,11 +650,11 @@ PaySwitch/
 
 
 
-\---
+ ---
 
 
 
-\## Testing
+ ## Testing
 
 
 
@@ -674,15 +674,15 @@ The project also includes API-level regression coverage for payment flows, idemp
 
 
 
-\---
+ ---
 
 
 
-\## Design Decisions
+ ## Design Decisions
 
 
 
-\### Gateway Abstraction
+ ### Gateway Abstraction
 
 
 
@@ -694,23 +694,23 @@ Payment processing is separated from individual gateway implementations.
 
 PaymentService
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
 PaymentRouter
 
-&#x20;     │
+      │
 
-&#x20;     ▼
+      ▼
 
 Gateway Interface
 
-&#x20;  ┌──┴──────┐
+   ┌──┴──────┐
 
-&#x20;  ▼         ▼
+   ▼         ▼
 
-&#x20;Stripe     Mock
+ Stripe     Mock
 
 ```
 
@@ -720,7 +720,7 @@ This makes adding another payment provider possible without changing the core pa
 
 
 
-\### Idempotency
+ ### Idempotency
 
 
 
@@ -732,7 +732,7 @@ The key is persisted and mapped to the generated payment ID. Repeating the same 
 
 
 
-\### Retry and Failover
+ ### Retry and Failover
 
 
 
@@ -748,7 +748,7 @@ This prevents temporary gateway failures from unnecessarily becoming permanent p
 
 
 
-\### State Machine
+ ### State Machine
 
 
 
@@ -760,7 +760,7 @@ This protects the payment lifecycle from invalid transitions and inconsistent st
 
 
 
-\### Background Processing
+ ### Background Processing
 
 
 
@@ -772,11 +772,11 @@ Background workers process asynchronous reconciliation work without blocking the
 
 
 
-\---
+ ---
 
 
 
-\## Why PaySwitch?
+ ## Why PaySwitch?
 
 
 
@@ -788,21 +788,21 @@ A production-oriented orchestration layer must handle:
 
 
 
-\- gateway selection
+ - gateway selection
 
-\- failures
+ - failures
 
-\- retries
+ - retries
 
-\- duplicate requests
+ - duplicate requests
 
-\- asynchronous events
+ - asynchronous events
 
-\- inconsistent gateway states
+ - inconsistent gateway states
 
-\- reconciliation
+ - reconciliation
 
-\- observability
+ - observability
 
 
 
@@ -810,11 +810,11 @@ PaySwitch demonstrates these backend engineering concerns in a single system bui
 
 
 
-\---
+ ---
 
 
 
-\## Future Extensions
+ ## Future Extensions
 
 
 
@@ -822,35 +822,35 @@ Possible production-scale extensions include:
 
 
 
-\- additional payment gateways
+ - additional payment gateways
 
-\- circuit breaker persistence
+ - circuit breaker persistence
 
-\- distributed locking
+ - distributed locking
 
-\- Kafka/event streaming
+ - Kafka/event streaming
 
-\- stronger authentication and authorization
+ - stronger authentication and authorization
 
-\- OpenTelemetry tracing
+ - OpenTelemetry tracing
 
-\- Prometheus/Grafana integration
+ - Prometheus/Grafana integration
 
-\- advanced rule-based routing
+ - advanced rule-based routing
 
-\- merchant-specific routing policies
-
-
-
-\---
+ - merchant-specific routing policies
 
 
 
-\## Author
+ ---
 
 
 
-\*\*Ekram Zafar\*\*
+ ## Author
+
+
+
+ * *Ekram Zafar * *
 
 
 
