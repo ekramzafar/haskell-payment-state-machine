@@ -75,9 +75,16 @@ executable PaySwitch
        servant,
        servant-server,
        aeson,
+       bytestring,
        warp,
+       wai,
        random,
-       postgresql-simple
+       http-client,
+       http-client-tls,
+       http-types,
+       hedis >= 0.16.4,
+       postgresql-simple,
+       stm
     -- Directories containing source files.
     hs-source-dirs:   app, src
     other-modules:
@@ -88,6 +95,11 @@ executable PaySwitch
        Repository.Database
        Gateway.Gateway
        Gateway.MockGateway
+       Repository.RedisRepository
+       Worker.PaymentWorker
+       Monitoring.Metrics
+       Gateway.StripeGateway
+       Gateway.AppGateway
 
     -- Base language which the package is written in.
     default-language: GHC2024
@@ -99,7 +111,8 @@ test-suite PaySwitch-test
     build-depends:
         base,
         aeson,
-        postgresql-simple
+        postgresql-simple,
+        hspec
     other-modules:
         Domain.Payment
         Service.PaymentService

@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: payswitch-postgres-compose
+    environment:
+      POSTGRES_USER: payswitch
+      POSTGRES_PASSWORD: payswitch_dev_password
+      POSTGRES_DB: payswitch
+    ports:
+      - "5434:5432"
+    volumes:
+      - payswitch-postgres-data:/var/lib/postgresql/data
+    networks:
+      - payswitch-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U payswitch -d payswitch"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
+  redis:
+    image: redis:7
+    container_name: payswitch-redis-compose
+    ports:
+      - "6380:6379"
+    networks:
+      - payswitch-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  payswitch:
+    image: payswitch:latest
+    container_name: payswitch-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      PAYSWITCH_DB_HOST: postgres
+      PAYSWITCH_DB_PORT: 5432
+      PAYSWITCH_DB_USER: payswitch
+      PAYSWITCH_DB_PASSWORD: payswitch_dev_password
+      PAYSWITCH_DB_NAME: payswitch
+      PAYSWITCH_REDIS_HOST: redis
+      PAYSWITCH_REDIS_PORT: 6379
+    networks:
+      - payswitch-network
+    ports:
+      - "8080:8080"
+
+networks:
+  payswitch-network:
+    driver: bridge
+
+volumes:
+  payswitch-postgres-data:

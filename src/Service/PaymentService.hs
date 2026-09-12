@@ -264,6 +264,13 @@ isValidTransition Success Captured = True
 isValidTransition Captured Refunded = True
 isValidTransition _ _ = False
 
+isValidWebhookTransition
+    :: PaymentStatus
+    -> PaymentStatus
+    -> Bool
+isValidWebhookTransition currentStatus newStatus =
+    isValidTransition currentStatus newStatus
+
 
 reconcilePayment
     :: Connection

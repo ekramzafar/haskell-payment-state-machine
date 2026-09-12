@@ -1,4 +1,3 @@
-{-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Domain.Payment where
@@ -8,10 +7,10 @@ import Data.Aeson
     , ToJSON(..)
     , object
     , withObject
+    , withText
     , (.:)
     , (.=)
     )
-import GHC.Generics (Generic)
 
 data PaymentStatus
     = Created
@@ -21,17 +20,36 @@ data PaymentStatus
     | Pending
     | Captured
     | Refunded
-    deriving (Show, Eq, Generic)
+    deriving (Show, Eq)
 
-instance ToJSON PaymentStatus
-instance FromJSON PaymentStatus
+instance ToJSON PaymentStatus where
+    toJSON Created = "Created"
+    toJSON Processing = "Processing"
+    toJSON Success = "Success"
+    toJSON Failed = "Failed"
+    toJSON Pending = "Pending"
+    toJSON Captured = "Captured"
+    toJSON Refunded = "Refunded"
+
+instance FromJSON PaymentStatus where
+    parseJSON =
+        withText "PaymentStatus" $ \value ->
+            case value of
+                "Created" -> pure Created
+                "Processing" -> pure Processing
+                "Success" -> pure Success
+                "Failed" -> pure Failed
+                "Pending" -> pure Pending
+                "Captured" -> pure Captured
+                "Refunded" -> pure Refunded
+                _ -> fail "Invalid payment status"
 
 data CreatePaymentRequest = CreatePaymentRequest
     { requestAmount        :: Int
     , requestCurrency      :: String
     , requestPaymentMethod :: String
     }
-    deriving (Show, Eq, Generic)
+    deriving (Show, Eq)
 
 instance ToJSON CreatePaymentRequest where
     toJSON request =
@@ -55,7 +73,23 @@ data Payment = Payment
     , paymentMethod :: String
     , status        :: PaymentStatus
     }
-    deriving (Show, Eq, Generic)
+    deriving (Show, Eq)
 
-instance ToJSON Payment
-instance FromJSON Payment
+instance ToJSON Payment where
+    toJSON payment =
+        object
+            [ "paymentId" .= paymentId payment
+            , "amount" .= amount payment
+            , "currency" .= currency payment
+            , "paymentMethod" .= paymentMethod payment
+            , "status" .= status payment
+            ]
+
+instance FromJSON Payment where
+    parseJSON = withObject "Payment" $ \obj ->
+        Payment
+            <$> obj .: "paymentId"
+            <*> obj .: "amount"
+            <*> obj .: "currency"
+            <*> obj .: "paymentMethod"
+            <*> obj .: "status"
